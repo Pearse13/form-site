@@ -197,7 +197,7 @@
 
   <script>
     // Webhook URL — replace with your actual endpoint
-    var WEBHOOK_URL = 'https://pearsemc.app.n8n.cloud/webhook/lead-capture'; 
+    var WEBHOOK_URL = 'https://pearsemc.app.n8n.cloud/webhook-test/lead-capture'; 
 
     var form = document.getElementById('leadForm');
     var formWrapper = document.getElementById('formWrapper');
@@ -205,7 +205,7 @@
     var errorMessage = document.getElementById('errorMessage');
     var submitBtn = document.getElementById('submitBtn');
 
-    form.addEventListener('submit', function (e) {
+      form.addEventListener('submit', function (e) {
       e.preventDefault();
 
       var firstName = document.getElementById('firstName').value.trim();
