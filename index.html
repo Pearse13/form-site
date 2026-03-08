@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Belfast Heating Co — Free Callback</title>
+  <style>
+    /* Reset and base */
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #fff;
+      color: #1a1a1a;
+      min-height: 100vh;
+      padding: 1.5rem;
+      line-height: 1.5;
+    }
+
+    /* Centred container with max width for readability */
+    .container {
+      max-width: 420px;
+      margin: 0 auto;
+      padding: 2rem 0;
+    }
+
+    /* Header */
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .company-name {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin: 0 0 0.5rem 0;
+      letter-spacing: -0.02em;
+    }
+    .tagline {
+      font-size: 1rem;
+      color: #444;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    /* Form styling */
+    .form-card {
+      background: #f8f8f8;
+      border-radius: 12px;
+      padding: 1.75rem;
+      border: 1px solid #eee;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .form-group:last-of-type {
+      margin-bottom: 1.5rem;
+    }
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+      color: #333;
+    }
+    input, select {
+      width: 100%;
+      padding: 0.65rem 0.85rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      background: #fff;
+      color: #1a1a1a;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: #333;
+      box-shadow: 0 0 0 2px rgba(0,0,0,0.08);
+    }
+    input::placeholder {
+      color: #888;
+    }
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.85rem center;
+      padding-right: 2rem;
+    }
+
+    /* Submit button */
+    .btn-submit {
+      width: 100%;
+      padding: 0.9rem 1.25rem;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background: #1a1a1a;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s, opacity 0.2s;
+    }
+    .btn-submit:hover {
+      background: #333;
+    }
+    .btn-submit:active {
+      opacity: 0.9;
+    }
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    /* Success and error messages (hidden by default) */
+    .message {
+      display: none;
+      text-align: center;
+      padding: 2rem 1rem;
+      border-radius: 12px;
+      font-size: 1.05rem;
+    }
+    .message.visible {
+      display: block;
+    }
+    .message-success {
+      background: #e8f5e9;
+      color: #1b5e20;
+      border: 1px solid #c8e6c9;
+    }
+    .message-error {
+      background: #ffebee;
+      color: #b71c1c;
+      border: 1px solid #ffcdd2;
+    }
+    .form-wrapper.hidden {
+      display: none;
+    }
+
+    /* Mobile: slightly reduce padding on small screens */
+    @media (max-width: 480px) {
+      body { padding: 1rem; }
+      .form-card { padding: 1.25rem; }
+      .company-name { font-size: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <h1 class="company-name">Belfast Heating Co</h1>
+      <p class="tagline">Get a free callback within 60 seconds</p>
+    </header>
+
+    <!-- Form: shown until successful submit -->
+    <div class="form-wrapper" id="formWrapper">
+      <form class="form-card" id="leadForm" novalidate>
+        <div class="form-group">
+          <label for="firstName">First Name <span aria-hidden="true">*</span></label>
+          <input type="text" id="firstName" name="firstName" required placeholder="Your first name" autocomplete="given-name">
+        </div>
+        <div class="form-group">
+          <label for="phone">Phone Number <span aria-hidden="true">*</span></label>
+          <input type="tel" id="phone" name="phone" required placeholder="e.g. 07XXX XXXXXX" autocomplete="tel">
+        </div>
+        <div class="form-group">
+          <label for="email">Email Address <span aria-hidden="true">*</span></label>
+          <input type="email" id="email" name="email" required placeholder="you@example.com" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="service">Service Needed <span aria-hidden="true">*</span></label>
+          <select id="service" name="service" required>
+            <option value="" disabled selected>Select a service</option>
+            <option value="Boiler Repair">Boiler Repair</option>
+            <option value="Plumbing">Plumbing</option>
+            <option value="General Heating">General Heating</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="postcode">Postcode <span aria-hidden="true">*</span></label>
+          <input type="text" id="postcode" name="postcode" required placeholder="e.g. BT1 1AA" autocomplete="postal-code">
+        </div>
+        <button type="submit" class="btn-submit" id="submitBtn">Get My Free Callback</button>
+      </form>
+    </div>
+
+    <!-- Success message: shown after successful submit -->
+    <div class="message message-success" id="successMessage" role="status" aria-live="polite"></div>
+
+    <!-- Error message: shown if POST fails -->
+    <div class="message message-error" id="errorMessage" role="alert" aria-live="assertive">
+      Something went wrong — please call us directly.
+    </div>
+  </div>
+
+  <script>
+    // Webhook URL — replace with your actual endpoint
+    var WEBHOOK_URL = 'WEBHOOK_URL_HERE';
+
+    var form = document.getElementById('leadForm');
+    var formWrapper = document.getElementById('formWrapper');
+    var successMessage = document.getElementById('successMessage');
+    var errorMessage = document.getElementById('errorMessage');
+    var submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var firstName = document.getElementById('firstName').value.trim();
+      var phone = document.getElementById('phone').value.trim();
+      var email = document.getElementById('email').value.trim();
+      var service = document.getElementById('service').value;
+      var postcode = document.getElementById('postcode').value.trim();
+
+      // Hide any previous messages
+      successMessage.classList.remove('visible');
+      errorMessage.classList.remove('visible');
+
+      var payload = {
+        name: firstName,
+        phone: phone,
+        email: email,
+        service: service,
+        postcode: postcode,
+        source: 'landing_page',
+        timestamp: new Date().toISOString()
+      };
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+
+      fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      })
+        .then(function (response) {
+          if (!response.ok) throw new Error('Request failed');
+          formWrapper.classList.add('hidden');
+          successMessage.textContent = 'Thanks ' + firstName + "! We'll call you within 60 seconds.";
+          successMessage.classList.add('visible');
+        })
+        .catch(function () {
+          errorMessage.classList.add('visible');
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Get My Free Callback';
+        });
+    });
+  </script>
+</body>
+</html>
